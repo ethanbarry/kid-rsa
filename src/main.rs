@@ -1,3 +1,11 @@
+/**
+ * An implementation in Rust of the KidRSA algorithm presented in
+ * Dr. Grave's AAM class at UT Tyler.
+ * <https://sj-graves.github.io/algorithms-book/sec-intro-kidrsa.html>
+ * NOT A STRONG ENCRYPTION ALGORITHM. MAY CAUSE DATA LOSS OR BLISTERS.
+ * HANDLE WITH CARE. CONTENTS MAY BE HOT.
+ **/
+
 fn main() {
     let ((n, e), (_, d)) = kid_rsa_keygen(4, 81, 123, 19963);
     let message = vec![
@@ -9,19 +17,15 @@ fn main() {
         4410363, 4410363, 4529562, 1827718,
     ];
 
-    let plaintext = kid_rsa_decrypt((n, d), message);
-    let text: String = plaintext.into_iter().collect();
+    let plaintext: String = kid_rsa_decrypt((n, d), message).into_iter().collect(); // Decrypt the encrypted message.
+    println!("Plaintext: {}", plaintext);
 
-    println!("Plaintext: {}", text);
-
-    // Encrypt and print encrypted string.
     let ciphertext = kid_rsa_encrypt(
         (n, e),
         "It's a dangerous business, Frodo, going out your door."
             .chars()
             .collect(),
-    );
-
+    ); // Encrypt and print encrypted string.
     println!("\nCiphertext: {:?}", ciphertext);
 }
 
