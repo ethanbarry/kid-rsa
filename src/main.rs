@@ -60,7 +60,7 @@ mod tests {
 
     #[test]
     fn test_decrypt() {
-        let ((n, e), (_, d)) = kid_rsa_keygen(4, 81, 123, 19963);
+        let ((n, _), (_, d)) = kid_rsa_keygen(4, 81, 123, 19963);
         let message = vec![
             2900509, 4609028, 1549587, 4569295, 1271456, 3854101, 1271456, 3973300, 3854101,
             4370630, 4092499, 4013033, 4529562, 4410363, 4648761, 4569295, 1271456, 3893834,
@@ -69,7 +69,7 @@ mod tests {
             4171965, 4370630, 4092499, 1271456, 4410363, 4648761, 4609028, 1271456, 4807693,
             4410363, 4648761, 4529562, 1271456, 3973300, 4410363, 4410363, 4529562, 1827718,
         ];
-        let mut plaintext = kid_rsa_decrypt((n, d), message);
+        let plaintext = kid_rsa_decrypt((n, d), message);
         let text: String = plaintext.into_iter().collect();
 
         assert_eq!(
@@ -80,7 +80,7 @@ mod tests {
 
     #[test]
     fn test_encrypt() {
-        let ((n, e), (_, d)) = kid_rsa_keygen(4, 81, 123, 19963);
+        let ((n, e), (_, _)) = kid_rsa_keygen(4, 81, 123, 19963);
         let message = vec![
             2900509, 4609028, 1549587, 4569295, 1271456, 3854101, 1271456, 3973300, 3854101,
             4370630, 4092499, 4013033, 4529562, 4410363, 4648761, 4569295, 1271456, 3893834,
@@ -90,7 +90,7 @@ mod tests {
             4410363, 4648761, 4529562, 1271456, 3973300, 4410363, 4410363, 4529562, 1827718,
         ];
         let plaintext = String::from("It's a dangerous business, Frodo, going out your door.");
-        let mut ciphertext = kid_rsa_encrypt((n, e), plaintext.chars().collect());
+        let ciphertext = kid_rsa_encrypt((n, e), plaintext.chars().collect());
 
         assert_eq!(message, ciphertext);
     }
