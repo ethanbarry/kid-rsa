@@ -35,16 +35,6 @@ pub fn kid_rsa_keygen(a: u32, b: u32, a_prime: u32, b_prime: u32) -> ((u32, u32)
     ((n.try_into().unwrap(), e), (n.try_into().unwrap(), d))
 }
 
-fn encode(text: &str) -> Vec<u32> {
-    text.to_owned().chars().map(|c| c as u32).collect()
-}
-
-fn decode(text: Vec<u32>) -> Vec<char> {
-    text.into_iter()
-        .map(|c| char::from_u32(c).expect("Invalid UTF-8"))
-        .collect()
-}
-
 fn kid_rsa_encrypt(key: (u32, u32), text: Vec<char>) -> Vec<u32> {
     text.into_iter()
         .map(|c| (c as u32 * key.1) % key.0)
