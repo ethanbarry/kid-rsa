@@ -3,6 +3,8 @@
 This is a simple pseudo-encryption algorithm from Dr. Grave's Algorithms & Applied Math
 class at UT Tyler, intended for gaining familiarity with programming concepts.
 
+See [this book](https://sj-graves.github.io/algorithms-book/sec-intro-kidrsa.html).
+
 This Rust implementation leverages some of Rust's *functional* features, such
 as `iter.collect()` and `.map()` functions.
 
